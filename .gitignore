@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Environnement virtuel
+venv/
+env/
+ENV/
+
+# Base de données SQLite
+*.db
+
+# Fichier des secrets
+.env
+
+# Fichiers de migration Flask-Migrate
+migrations/
+
+# IDE / éditeurs
+.vscode/
+.idea/
+*.swp
