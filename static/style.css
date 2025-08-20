@@ -43,10 +43,18 @@ nav ul li a:hover {
   color: rgba(255, 255, 255, 0.7);
 }
 
-
+.map-container {
+    display: flex;
+    flex-direction: row; /* carte à gauche, sidebar à droite */
+    justify-content: space-between;
+    width: 90vw;
+    max-width: 1200px;
+    margin: 2vh auto; /* centré horizontalement */
+    gap: 2vw; /* espace entre carte et sidebar */
+}
 
 #map {
-    width: 90vh;
+    width: 90vw;
     max-width: 1200px;
     height: 70vh;
     margin: 4vh auto; /* centré horizontalement et marge */
@@ -55,6 +63,18 @@ nav ul li a:hover {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombre */
 
     
+}
+
+#map2 {
+    flex: 2; /* occupe plus de place que la sidebar */
+    height: 60vh; /* hauteur responsive */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+#sidebar {
+    flex: 1; /* moins large que la carte */
+    min-width: 250px;
 }
 
 h1 {

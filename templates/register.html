@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <div class="container">
+        <h2>Créer un compte</h2>
+        <form method="POST">
+            <div class="mb-3">
+            <label>Pseudonyme</label>
+            <input class="form-control" type="text" name="username" required>
+            </div>
+            <div class="mb-3">
+            <label>Email</label>
+            <input class="form-control" type="email" name="email" required>
+            </div>
+            <div class="mb-3">
+            <label>Mot de Passe</label>
+            <input class="form-control" type="password" name="password" required>
+            </div>
+            <div class="mb-3">
+            <label>Pays</label>
+            <input class="form-control" type="text" name="country">
+            </div>
+            <div class="mb-3">
+            <label>Ville</label>
+            <input class="form-control" type="text" name="city">
+            </div>
+            <button class="btn btn-success" type="submit">Créer</button>
+        </form>
+    </div>
+
+{% endblock %}

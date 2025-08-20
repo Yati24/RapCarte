@@ -1,0 +1,9 @@
+<h2>Modifier User : {{ user.username }}</h2>
+<form method="POST">
+    <input type="text" name="username" value="{{ user.username }}" required>
+    <input type="email" name="email" value="{{ user.email }}" required>
+    <input type="text" name="country" value="{{ user.country }}">
+    <input type="text" name="city" value="{{ user.city }}">
+    <input type="password" name="password" placeholder="Nouveau mot de passe (laisser vide pour ne pas changer)">
+    <button type="submit">Enregistrer</button>
+</form>

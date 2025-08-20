@@ -2,8 +2,75 @@
 
 {% block main %}
 
-    <div class="container">
+    <div class="map-container">
+        <div id="map2">
+            <script>
+                // Initialize the map position and zoom
+                var map = L.map('map2').setView([46.5, 2.5], 5);
+                // OpenStreetMap tile layer
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                    attribution: '&copy; OpenStreetMap &copy; CARTO',
+                    subdomains: 'abcd',
+                    maxZoom: 20
+                }).addTo(map);
 
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
+                    subdomains: 'abcd',
+                    maxZoom: 20
+                }).addTo(map);
+                
+                map.invalidateSize();  // force Leaflet à recalculer la taille
+
+
+                var marker = L.marker([48.8566, 2.3522],
+                    {draggable:'true'}).addTo(map);
+                var lg_markers = L.layerGroup([marker]);
+
+                marker.on("drag", function(e) {
+                    var marker = e.target;
+                    var position = marker.getLatLng();
+                    document.getElementById("lat").value = position.lat;
+                    document.getElementById("lon").value = position.lng;
+                });
+
+
+            </script>
+
+
+
+            
+        </div>
+        <div id="sidebar">
+            <div class="form-group">
+                <h4 for="frm_name">Ajouter un rappeur</h4>
+                <p>Déplacez le marqueur pour choisir la position</p>
+            </div>
+            <form method="POST" action="{{ url_for('contribute') }}">
+                <div class="form-group">
+                    <label for="lat">Latitude</label>
+                    <input type="text" class="form-control" id="lat" name="lat" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="lon">Longitude</label>
+                    <input type="text" class="form-control" id="lon" name="lon" readonly>
+                </div>
+                <div class="form-group">
+                    <p>Nom du rappeur :</p>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Nom du rappeur">
+                </div>
+                <div class="form-group">
+                    <p>Description :</p>
+                    <input type="text" class="form-control" id="description" name="description" placeholder="Description du rappeur">
+                </div>
+                <div class="form-group">
+                    <p>URL Spotify :</p>
+                    <input type="text" class="form-control" id="spotify" name="spotify" placeholder="URL Spotify">
+                </div>
+                <hr>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                </div>
+        </div>
     </div>
 
 {% endblock %}
