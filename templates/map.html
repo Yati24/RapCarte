@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <div id="map">
+        <script>
+            // Initialize the map position and zoom
+            var map = L.map('map').setView([46.5, 2.5], 5);
+            // OpenStreetMap tile layer
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; OpenStreetMap &copy; CARTO',
+                subdomains: 'abcd',
+                maxZoom: 20
+            }).addTo(map);
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
+                subdomains: 'abcd',
+                maxZoom: 20
+            }).addTo(map);
+            
+            // Récupération des rappeurs envoyés depuis Flask
+            var rappers = [
+                {% for rapper in rappers %}
+                    {
+                        id: {{ rapper.id }},
+                        name: "{{ rapper.name }}",
+                        desc: "{{ rapper.description }}",
+                        spotify: "{{ rapper.spotify_url }}",
+                        votes: {{ rapper.votes }},
+                        lat: {{ rapper.lat }},
+                        lon: {{ rapper.lon }}
+                    }{% if not loop.last %},{% endif %}
+                {% endfor %}
+            ];
+
+            // Boucle JS pour ajouter les markers
+            rappers.forEach(function(rapper) {
+                L.marker([rapper.lat, rapper.lon])
+                    .addTo(map)
+                    .bindPopup(
+                        "<b>" + rapper.name + "</b><br>" +
+                        "<b>" + rapper.desc + "</b><br>" +
+                        "Spotify: <a href='" + rapper.spotify + "' target='_blank'>Écouter</a><br>" +
+                        "Votes: " + rapper.votes
+                    );
+            });
+            </script>
+
+
+
+        
+    </div>
+
+{% endblock %}
